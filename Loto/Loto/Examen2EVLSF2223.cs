@@ -44,7 +44,7 @@ namespace ExamenLoto
             for (int i = 0; i < 6; i++)
                 nums[i] = Convert.ToInt32(combinacion[i].Text);
             miLoto = new lotoLSF2223(nums);
-            if (miLoto.ok)
+            if (miLoto.Ok)
                 MessageBox.Show("Combinación válida");
             else
                 MessageBox.Show("Combinación no válida");
@@ -56,7 +56,7 @@ namespace ExamenLoto
             for (int i = 0; i < 6; i++)
                 nums[i] = Convert.ToInt32(combinacion[i].Text);
             miLoto = new lotoLSF2223(nums);
-            if (miLoto.ok)
+            if (miLoto.Ok)
             {
                 nums = new int[6];
                 for (int i = 0; i < 6; i++)

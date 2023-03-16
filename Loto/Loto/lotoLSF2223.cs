@@ -12,49 +12,57 @@ namespace LotoClassNS
         public const int NUMERO_MAYOR = 49;
         
         private int[] _nums = new int[MAX_NUMEROS];   // numeros de la combinación
-        public bool ok = false;      // combinación válida (si es aleatoria, siempre es válida, si no, no tiene porqué)
+        private bool ok = false;      // combinación válida (si es aleatoria, siempre es válida, si no, no tiene porqué)
 
 
-     
+
         public int[] Nums { 
-            get => _nums; 
-            set => _nums = value; 
+            get => _nums;
+            set
+            {
+                _nums = value;
+            } 
         }
+        public bool Ok { get => ok; set => ok = value; }
 
-       
+
         /// <summary>
         /// Constructor por defecto de la clase. En el caso de que el constructor sea vacío, se genera una combinación aleatoria correcta.
         /// </summary>
         public lotoLSF2223()
         {
-            Random r = new Random();    // clase generadora de números aleatorios
+            Random aleatorio = new Random();    // clase generadora de números aleatorios
+            generarAleatorio(aleatorio);
 
+            Ok = true;
+        }
+
+        private void generarAleatorio(Random aleatorio)
+        {
             int i, j, num;
-            i = 0; 
+            i = 0;
 
             do             // generamos la combinación
-            {                       
-                num = r.Next(NUMERO_MENOR, NUMERO_MAYOR + 1);     // generamos un número aleatorio del 1 al 49
-                for (j=0; j<i; j++)
+            {
+                num = aleatorio.Next(NUMERO_MENOR, NUMERO_MAYOR + 1);     // generamos un número aleatorio del 1 al 49
+                for (j = 0; j < i; j++)
                 {
                     if (Nums[j] == num)
                     {
                         break; // comprobamos que el número no está
                     }
-                       
-                }    
-                    
-                if (i==j)               // Si i==j, el número no se ha encontrado en la lista, lo añadimos
+
+                }
+
+                if (i == j)               // Si i==j, el número no se ha encontrado en la lista, lo añadimos
                 {
-                    Nums[i]=num;
+                    Nums[i] = num;
                     i++;
                 }
-            } while (i<MAX_NUMEROS);
-
-            ok=true;
+            } while (i < MAX_NUMEROS);
         }
 
-        
+
         /// <summary>
         /// La segunda forma de crear una combinación es pasando el conjunto de números
         // misnums es un array de enteros con la combinación que quiero crear (no tiene porqué ser válida)
@@ -62,7 +70,7 @@ namespace LotoClassNS
         /// <param name="misnums">Son los números que introduce el usuario.</param>
         public lotoLSF2223(int[] misnums)  // misnumeros: combinación con la que queremos inicializar la clase
         {
-            int j;
+             int j;
             for (int i = 0; i < MAX_NUMEROS; i++)
                 if (misnums[i] >= NUMERO_MENOR && misnums[i] <= NUMERO_MAYOR) {
                    
@@ -72,16 +80,16 @@ namespace LotoClassNS
                     if (i == j)
                         Nums[i] = misnums[i]; // validamos la combinación
                     else {
-                        ok = false;
+                        Ok = false;
                         return;
                     }
                 }
                 else
                 {
-                    ok = false;     // La combinación no es válida, terminamos
+                    Ok = false;     // La combinación no es válida, terminamos
                     return;
                 }
-	    ok = true;
+	        Ok = true;
         }
 
 
@@ -93,11 +101,11 @@ namespace LotoClassNS
         /// <returns></returns>
         public int comprobar(int[] premi)
         {
-            int a = 0;                    // número de aciertos
+            int acertados = 0;                    // número de aciertos
             for (int i = 0; i < MAX_NUMEROS; i++)
                 for (int j = 0; j < MAX_NUMEROS; j++)
-                    if (premi[i] == Nums[j]) a++;
-            return a;
+                    if (premi[i] == Nums[j]) acertados++;
+            return acertados;
         }
     }
 
