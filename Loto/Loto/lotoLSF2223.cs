@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LotoClassNS
+namespace ExamenLoto
 {
     // Clase que almacena una combinación de la lotería
     //
@@ -37,7 +37,7 @@ namespace LotoClassNS
             Ok = true;
         }
 
-        private void generarAleatorio(Random aleatorio)
+        public void generarAleatorio(Random aleatorio)
         {
             int i, j, num;
             i = 0;
